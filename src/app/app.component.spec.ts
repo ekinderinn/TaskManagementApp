@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'finalprojectangular'`, () => {
+  it(`should have as title 'angular15-iwa2023-http-students'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('finalprojectangular');
+    expect(app.title).toEqual('angular15-iwa2023-http-students');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('finalprojectangular app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular15-iwa2023-http-students app is running!');
   });
 });

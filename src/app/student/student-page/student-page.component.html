@@ -1,0 +1,7 @@
+<h3>All subjects</h3>
+<ul>
+  <li *ngFor="let subject of subjects">
+    {{ subject.name }}
+    <button *ngIf="!subject.enrolled" (click)="enroll(subject.id)">Enroll</button>
+  </li>
+</ul>

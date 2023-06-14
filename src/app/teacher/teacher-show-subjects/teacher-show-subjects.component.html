@@ -1,0 +1,18 @@
+<h3>Your subjects</h3>
+<ul>
+  <div *ngFor="let subject of subjects">
+    Name: {{ subject.name }}
+    <br>
+    Teacher ID: {{ subject.teacherId }}
+    <br>
+    <ul *ngFor="let student of subject.students">
+      Email: {{ student.email }}
+      <br>
+    </ul>
+    <br>
+    <button (click)="viewSubject(subject.id)">View Subject</button>
+  </div>
+</ul>
+<h3>Add Subject</h3>
+<input [(ngModel)]="newSubjectForm.name" type="text" placeholder="Subject Name">
+<button (click)="createSubject()">Add Subject</button>

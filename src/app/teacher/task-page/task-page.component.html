@@ -1,0 +1,12 @@
+<h3>Task Page</h3>
+<p>Task ID: {{ task?.id }}</p>
+<p>Task Name: {{ task?.name }}</p>
+<p>Task Description: {{ task?.description }}</p>
+<p>Task Deadline: {{ task?.deadline }}</p>
+
+<h4>Enrolled Students:</h4>
+<ul>
+  <li *ngFor="let student of enrolledStudents">
+    {{ student.email }}
+  </li>
+</ul>
