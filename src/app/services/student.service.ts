@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import {Subject} from "../models/subject.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,10 @@ export class StudentService {
 
   enrollSubject(subjectId: number): Observable<any> {
     return this.http.patch<any>(`${this.studentUrl}/subjects/${subjectId}`, {});
+  }
+
+  getEnrolledSubjects(): Observable<Subject[]> {
+    const url = `${this.studentUrl}/enrolledsubjects`
+    return this.http.get<Subject[]>(url);
   }
 }

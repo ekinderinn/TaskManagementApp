@@ -45,4 +45,9 @@ export class TeacherService {
     return this.http.post(this.getTeacherSubjectsUrl, addSubjectForm);
   }
 
+  giveGrade(subjectId: number, taskId: number, gradeId: number, grade: string): Observable<any> {
+    const url = `${this.getTeacherSubjectsUrl}/${subjectId}/${taskId}/${gradeId}`;
+    return this.http.patch(url, grade);
+  }
+
 }

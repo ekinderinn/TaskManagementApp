@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from "../../services/student.service";
 import { Router } from '@angular/router';
+import {Subject} from "../../models/subject.model";
 
 @Component({
   selector: 'app-student-page',
@@ -8,12 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./student-page.component.css']
 })
 export class StudentPageComponent implements OnInit {
-  subjects: any[] = [];
+  subjects?: Subject[];
+  mySubjects?: Subject[];
 
   constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit() {
     this.loadSubjects();
+    this.loadEnrolledSubjects();
   }
 
   loadSubjects() {
@@ -23,15 +26,35 @@ export class StudentPageComponent implements OnInit {
       }
     );
   }
-
-  enroll(subjectId: number) {
-    this.studentService.enrollSubject(subjectId).subscribe(
-      () => {
-        this.loadSubjects(); // Refresh the subject list after successful enrollment
-      },
-      (error) => {
-        console.log(error);
+  loadEnrolledSubjects() {
+    this.studentService.getEnrolledSubjects().subscribe(
+      (enrolled) => {
+        this.mySubjects = enrolled;
+        console.log(enrolled);
       }
-    );
+
+    )
+  }
+
+  enroll(subjectId?: number) {
+    if (subjectId) {
+      this.studentService.enrollSubject(subjectId).subscribe(
+        () => {
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+
+  isEnrolled(subject?: Subject): boolean {
+    if (!this.mySubjects || !subject) {
+      return false;
+    }
+
+    return this.mySubjects.some((mySubject) => mySubject.id === subject.id);
   }
 }

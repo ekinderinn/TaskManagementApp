@@ -2,6 +2,7 @@
 <ul>
   <li *ngFor="let subject of subjects">
     {{ subject.name }}
-    <button *ngIf="!subject.enrolled" (click)="enroll(subject.id)">Enroll</button>
+    <button *ngIf="!isEnrolled(subject)" (click)="enroll(subject.id)">Enroll</button>
+    <button *ngIf="isEnrolled(subject)">View</button>
   </li>
 </ul>

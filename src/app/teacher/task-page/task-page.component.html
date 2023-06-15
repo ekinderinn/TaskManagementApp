@@ -1,12 +1,22 @@
-<h3>Task Page</h3>
-<p>Task ID: {{ task?.id }}</p>
-<p>Task Name: {{ task?.name }}</p>
-<p>Task Description: {{ task?.description }}</p>
-<p>Task Deadline: {{ task?.deadline }}</p>
+<h2>Task Details</h2>
+<div *ngIf="task">
+  <p><strong>Name:</strong> {{ task.name }}</p>
+  <p><strong>Description:</strong> {{ task.description }}</p>
+  <p><strong>Deadline:</strong> {{ task.deadline | date }}</p>
+  <h4>Students:</h4>
+  <ul>
+    <li *ngFor="let grade of task.studentGrades">
+      <div *ngIf="grade.value">
+        <strong>{{ grade.email }}:</strong> {{ grade.value }}
+      </div>
+      <div *ngIf="!grade.value">
+        <strong>{{ grade.email }}:</strong>
+        <label for="grade">Grade</label>
+        <input type="text" id="grade" name="grade" required #newGrade>
+        <button (click)="giveGrade(newGrade.value, grade?.id)">Add</button>
+      </div>
+    </li>
+  </ul>
+</div>
 
-<h4>Enrolled Students:</h4>
-<ul>
-  <li *ngFor="let student of enrolledStudents">
-    {{ student.email }}
-  </li>
-</ul>
+

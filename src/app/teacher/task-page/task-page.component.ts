@@ -4,6 +4,7 @@ import { TeacherService } from "../../services/teacher.service";
 import { Task } from "../../models/task.model";
 import { User } from "../../models/user.model";
 import { Router } from '@angular/router';
+import {Grade} from "../../models/grade.model";
 
 @Component({
   selector: 'app-task-page',
@@ -23,6 +24,8 @@ export class TaskPageComponent implements OnInit {
       (task) => {
         console.log(task);
         this.task = task;
+        console.log("grades");
+        console.log(this.task.studentGrades);
         this.fetchEnrolledStudents(task.subjectId);
       }
     );
@@ -36,4 +39,21 @@ export class TaskPageComponent implements OnInit {
       }
     );
   }
+
+
+  giveGrade(grade: string, gradeId?: number) {
+    const subjectId = Number(this.route.snapshot.paramMap.get('subjectId'));
+    const taskId = Number(this.route.snapshot.paramMap.get('taskId'));
+    if (gradeId) {
+      this.teacherService.giveGrade(subjectId, taskId, gradeId, grade).subscribe(
+        (data) => {
+          console.log(data);
+          window.location.reload();
+        }
+      );
+    }
+  }
+
+
+
 }
